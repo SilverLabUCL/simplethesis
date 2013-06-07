@@ -1,0 +1,293 @@
+
+%% \documentclass[11pt,english]{report}
+%% \usepackage[T1]{fontenc}
+%% \usepackage{times}
+%% \usepackage[latin9]{inputenc}
+
+
+\documentclass[11pt,a4paper]{report}    % A4 paper, 11pt font
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\usepackage{fullpage}
+
+
+\usepackage{setspace}        			% Allows double and one-and-one-half line spacing based on the point size in use
+
+\usepackage{makeidx}         			% allows index generation
+\usepackage{graphicx}        			% standard LaTeX graphics tool
+\usepackage{tocloft}         			% Table of contents, list of figures
+
+\usepackage[authoryear,round, sort]{natbib}  	% Bibliography
+
+%\usepackage{hyperref}					% Hyperlinks
+\usepackage{color}                      % Colours
+\usepackage{verbatim}                   % Comment block
+
+
+\usepackage{multirow}					% tables
+
+\usepackage{ifthen}
+\usepackage{verbatim} 					% multiline comments
+
+\newboolean{JUSTAPPENDIX}
+\setboolean{JUSTAPPENDIX}{true}
+
+\usepackage[innercaption]{sidecap}      % side captions
+
+%\usepackage{soul} 					    % underlining
+\usepackage{upgreek}      % greek
+
+
+\usepackage{fancyhdr}
+
+
+\makeatletter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+
+
+\newcommand{\mytitle}{This is the title of my thesis...}
+
+\newcommand{\todo}[1] {\color{red}{\textbf{(#1)}}\color{black}}
+
+\newcommand{\nmlel}[1] {\textit{\textbf{#1}}}
+\newcommand{\fileref}[1] {\textbf{#1}}
+
+
+\newcommand{\myurl}[1] {\footnote{\underline{#1}}}
+\newcommand{\inlineurl}[2] {\color{black}{\underline{#1}}\color{black}{#2}}
+
+
+\newcommand{\scires}[1] {\color{blue}{\textbf{\large{#1}}}\color{black}}
+
+\newcommand{\mycode}[1] {\textit{\textbf{#1}}}
+
+
+\newcommand{\figref}[2] {Figure \ref{#1}{#2}}
+\newcommand{\figrefA}[2] {Figure \ref{#1}{#2}}
+\newcommand{\figrefB}[2] {(Figure \ref{#1})}
+
+
+\newcommand{\secref}[1] {section \ref{#1}}
+\newcommand{\Secref}[1] {Section \ref{#1}}
+\newcommand{\chapref}[1] {chapter \ref{#1}}
+\newcommand{\tabref}[1] {Table \ref{#1}}
+
+
+\renewcommand{\@makechapterhead}[1]{%
+  \vspace*{30\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \hrule                                        % horizontal line
+    \vspace{5pt}%                                 % add vertical space
+    \ifnum \c@secnumdepth >\m@ne
+        \LARGE \@chapapp\space \thechapter % Chapter number
+        \par\nobreak
+        \vskip 20\p@
+    \fi
+    \interlinepenalty\@M
+    \LARGE \textbf{#1}\par                        % chapter title
+    \vspace{5pt}%                                 % add vertical space
+    \hrule                                        % horizontal rule
+    \nobreak
+    \vskip 40\p@
+  }}
+  
+\renewcommand{\@makeschapterhead}[1]{%
+  \vspace*{30\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \LARGE \textbf{#1}\par                         % chapter title
+    \nobreak
+    \vskip 40\p@
+  }}
+  
+\renewcommand{\cftsecfont}{
+\normalfont
+}
+\renewcommand{\cftsecpagefont}{%
+\normalfont 
+}
+
+\newcommand{\mypart}[1]{\newpage{}
+\addcontentsline{toc}{part}{#1}
+\Huge {\textbf{#1}}\normalsize}
+
+\newcommand{\mypartnohead}[1]{\newpage{}
+\addcontentsline{toc}{part}{#1}}
+
+
+
+\newcommand{\myaddfig}[4]{
+\myaddfigpb{#1}{#2}{#3}{#4}{3}
+}
+
+\newcommand{\myaddfigpb}[5]{
+\begin{figure}
+\begin{center}
+\includegraphics[scale=#4]{figures/#1.png} 
+\end{center}
+\caption[#2]{#3} 
+\label{#1}  
+\end{figure}
+\pagebreak[#5]}
+
+\newcommand{\myaddtablefig}[4]{
+\begin{table}[ht]
+\centering
+\begin{tabular}{c}
+\includegraphics[scale=#4]{figures/#1.png} \\
+\end{tabular}
+\caption[#2]{#3} 
+\label{#1}  
+\end{table}
+\pagebreak[0]}
+
+
+\newcommand{\myaddfigside}[4]{
+\begin{SCfigure}
+\centering
+\caption[#2]{#3} 
+\includegraphics[scale=#4]{figures/#1.png} 
+\label{#1}  
+\end{SCfigure}
+\pagebreak[2]}
+
+
+
+\newcommand{\supers}[1]{\ensuremath{^{\textrm{\scriptsize{#1}}}}}
+\newcommand{\subs}[1]{\ensuremath{_{\textrm{\scriptsize{#1}}}}}
+
+
+\newcommand{\Cappp}[0]{Ca\supers{2+}}
+\newcommand{\Capp}[0]{\Cappp~}
+
+\newcommand{\Cappcp}[0]{[Ca\supers{2+}]}
+\newcommand{\Cappc}[0]{\Cappcp~}
+
+\newcommand{\Mgppp}[0]{Mg\supers{2+}}
+\newcommand{\Mgpp}[0]{\Mgppp~}
+
+\newcommand{\Napp}[0]{Na\supers{+}}
+\newcommand{\Nap}[0]{\Napp~}
+
+\newcommand{\Kpp}[0]{K\supers{+}}
+\newcommand{\Kp}[0]{\Kpp~}
+
+\newcommand{\Ihp}[0]{I\subs{h}}
+\newcommand{\Ih}[0]{\Ihp~}
+
+\newcommand{\mytilde}{$\sim$}
+\newcommand{\myum}{$\mathrm{\mu}$m }
+
+
+
+
+\makeindex         
+
+\makeatother
+
+%\usepackage{babel}
+
+\begin{document}
+
+\doublespace 
+%\setuldepth{0}
+
+\title{\mytitle}
+
+\thispagestyle{empty}
+
+\author{I. M. Author}
+
+\begin{center}
+\LARGE \textbf{\mytitle}
+\normalsize
+
+\par\end{center}
+\begin{center}
+
+
+\par\end{center}
+
+\begin{center}
+\par
+\par I. M. Author
+\par\end{center}
+
+\begin{center}
+\par Department of Neuroscience, Physiology and Pharmacology
+\par\end{center}
+
+\begin{center}
+UCL
+\par\end{center}
+
+\begin{center}
+February 2012
+\par\end{center}
+This is a thesis submitted to the University of London in the Faculty of Life Sciences for the degree of Doctor of Philosophy. I confirm that the work presented is my own. Where information has been derived from other sources it has been indicated.
+
+
+
+
+\mypart{Abstract}
+\\\\This is my abstract...
+
+ 
+
+\pagebreak{}
+
+
+\onehalfspacing
+\tableofcontents{}
+
+\doublespace 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\singlespace 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\onehalfspacing
+
+\pagebreak{}
+
+\mypartnohead{List of Figures}
+\listoffigures
+
+\mypartnohead{List of Tables} 
+\listoftables
+
+%%%%%%%%%%%%%%
+%\mypart{List of Abbreviations}
+%\\\\AMPA....
+%%%%%%%%%%%%%%%%%
+
+\mypart{List of Publications}
+
+\paragraph*{}
+\paragraph*{}
+\textbf{\large{Journal Publications}}
+\paragraph*{}
+Gleeson P, Crook S, Cannon RC, Hines ML, Billings GO, Farinella M, Morse TM, Davison AP, Ray S, Bhalla US, Barnes SR, Dimitrova YD, Silver RA (2010) NeuroML: A language for describing data driven models of neurons and networks with a high degree of biological detail. \textit{PLoS Computational Biology} 6(6):e1000, 815
+\paragraph*{}
+Vervaeke K, L\H{o}rincz A, Gleeson P, Farinella M, Nusser Z, Silver RA (2010) Rapid desynchronization of an electrically coupled interneuron network with sparse excitatory synaptic input. \textit{Neuron} 67(3):435–451
+
+\paragraph*{}
+\paragraph*{}
+
+\mypart{Acknowledgements}
+\\\\I would like to thank my agent...
+
+\paragraph*{}
+
+This work was supported by...
+
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+
+\include{Chapter1}
+\include{Chapter2}
+
+\fancyhead[LO]{\textit{Bibliography}}
+
+
+\addcontentsline{toc}{part}{Bibliography}
+\bibliographystyle{spbasic}
+\bibliography{MainDoc}
+\pagebreak{}
+
+
+\end{document}
