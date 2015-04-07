@@ -10,8 +10,8 @@ To build MainDoc.pdf type:
 
     make
     
-This will also generate todo.py if you have any statements in any tex doc of the format: 
+This will also generate todo.html, a web page with a list of TODOs (using [todo.py](https://github.com/SilverLabUCL/simplethesis/blob/master/todo.py)) if you have any statements in any tex doc of the format: 
 
     \todo{This is an important reminder! ****}
 
-Any questions, contact @pgleeson
+Any questions, contact @pgleeson.
