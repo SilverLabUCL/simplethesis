@@ -1,7 +1,6 @@
-Simple template for a thesis based on UCL preferred style
-=========================================================
+### Simple template for a thesis based on UCL preferred style
 
-This is a template for a UCL style thesis. Based on files developed by Tom Nielsen.
+This is a template for a [UCL](http://www.ucl.ac.uk) style thesis. Based on files developed by Tom Nielsen.
 
 The main title/abstract is contained in MainDoc.tex. This includes the separate files for Chapter 1/2 etc.
 
@@ -11,6 +10,8 @@ To build MainDoc.pdf type:
 
     make
     
-This will also generate todo.py if you have any statements in any tex doc of the format: \todo{This is an important reminder! ****}
+This will also generate todo.py if you have any statements in any tex doc of the format: 
+
+    \todo{This is an important reminder! ****}
 
 Any questions, contact @pgleeson
